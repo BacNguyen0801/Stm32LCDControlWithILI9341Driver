@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=D:/99_Working/01_Code/STM32F107_LCDControl/Inc
+HeaderPath=D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=D:/99_Working/01_Code/STM32F107_LCDControl/Src
+SourcePath=D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

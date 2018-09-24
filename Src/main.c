@@ -41,11 +41,11 @@
 #include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-#include "ILI9341\ILI9341_Touchscreen.h"
-#include "ILI9341\ILI9341_STM32_Driver.h"
-#include "ILI9341\ILI9341_GFX.h"
+#include "ILI9341_Touchscreen.h"
+#include "ILI9341_STM32_Driver.h"
+#include "ILI9341_GFX.h"
 
-#include "ILI9341\snow_tiger.h"
+#include "snow_tiger.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
