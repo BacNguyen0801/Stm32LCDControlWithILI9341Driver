@@ -17,12 +17,14 @@ void GSM_RunOne()
 		case e_GStateInit:
 		{
 			GSM_Init();
-			GSM_SwitchState(e_GStateSteady)
+			GSM_SwitchState(e_GStateSteady);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
 			break;
 		}
 		
 		case e_GStateSteady:
 		{
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
 			GSM_StateStateHandling();
 			break;
 		}
@@ -42,6 +44,8 @@ void GSM_SwitchState(eGlobalState state)
 
 void GSM_Init()
 {
+	/*Init ILI9341 driver*/
+	ILI9341_Init();
 	/* Init Background */
 	BGH_Init();
 	/* Init clock */

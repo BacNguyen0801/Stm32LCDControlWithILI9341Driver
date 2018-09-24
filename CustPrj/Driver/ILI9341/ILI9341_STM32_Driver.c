@@ -358,11 +358,11 @@ void ILI9341_Init(void)
 /*Sends single pixel colour information to LCD*/
 void ILI9341_Draw_Colour(uint16_t Colour)
 {
-//SENDS COLOUR
-HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
-HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
-ILI9341_Write_Data(Colour);
-HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+	//SENDS COLOUR
+	HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+	ILI9341_Write_Data(Colour);
+	HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
 }
 
 //INTERNAL FUNCTION OF LIBRARY
@@ -374,12 +374,6 @@ void ILI9341_Draw_Colour_Burst(uint16_t Colour, uint32_t Size)
 
 //FILL THE ENTIRE SCREEN WITH SELECTED COLOUR (either #define-d ones or custom 16bit)
 /*Sets address (entire screen) and Sends Height*Width ammount of colour information to LCD*/
-//void ILI9341_Fill_Screen(uint16_t Colour)
-//{
-//ILI9341_Set_Address(0,0,LCD_WIDTH,LCD_HEIGHT);
-//ILI9341_Draw_Colour_Burst(Colour, LCD_WIDTH*LCD_HEIGHT);
-//}
-
 void ILI9341_Fill_Screen(uint16_t Color)
 {
 	ILI9341_Set_Address(0,0,LCD_WIDTH,LCD_HEIGHT);

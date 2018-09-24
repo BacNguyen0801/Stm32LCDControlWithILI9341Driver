@@ -27,18 +27,21 @@
 							<builder buildPath="${workspace_loc:/STM32F107_LCDControl}/Debug" id="fr.ac6.managedbuild.builder.gnu.cross.1343683534" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="fr.ac6.managedbuild.builder.gnu.cross">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
 								</outputEntries>
 							</builder>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1199664000" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
 								<option defaultValue="gnu.c.optimization.level.none" id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.713709811" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.debug" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.1624857419" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1667048685" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="../Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F1xx_HAL_Driver/Inc"/>
-									<listOptionValue builtIn="false" value="../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
-									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Inc"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver/ILI9341}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1298876430" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__weak=__attribute__((weak))"/>
@@ -94,7 +97,14 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1225234048" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.2096353674" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.790266139" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="../CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Inc"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="D:/99_Working/01_Code/STM32F107_LCDControl/Stm32LCDControlWithILI9341Driver/CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver/ILI9341}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1867572554" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.305502601" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
@@ -102,7 +112,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="CustPrj/Driver/ILI9341"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="CustPrj"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
@@ -150,6 +160,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver/ILI9341}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1298876430" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__weak=__attribute__((weak))"/>
@@ -205,6 +217,8 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.2096353674" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.790266139" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="../CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver/ILI9341}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1867572554" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.305502601" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
@@ -212,6 +226,8 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.2051194537" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
 								<option id="gnu.both.asm.option.include.paths.1786126035" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="../CustPrj/Driver/ILI9341"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F107_LCDControl/CustPrj/Driver/ILI9341}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.646421907" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.262077265" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

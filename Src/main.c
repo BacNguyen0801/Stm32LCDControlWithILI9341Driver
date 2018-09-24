@@ -41,11 +41,9 @@
 #include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-#include "ILI9341_Touchscreen.h"
-#include "ILI9341_STM32_Driver.h"
-#include "ILI9341_GFX.h"
 
-#include "snow_tiger.h"
+#include "GlobalStateMachine.h" /*Global State machine header*/
+//#include "snow_tiger.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -55,8 +53,8 @@ TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-RTC_TimeTypeDef sTime;
-RTC_DateTypeDef sDate;
+//RTC_TimeTypeDef sTime;
+//RTC_DateTypeDef sDate;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,18 +116,18 @@ int main(void)
   MX_TIM1_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-  	ILI9341_Init();//initial driver setup to drive ili9341
-/*Set time*/
-  	sTime.Hours = 22;
-  	sTime.Minutes = 28;
-  	sTime.Seconds = 10;
-//  	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-/*Set date*/
-  	sDate.Date = 12;
-  	sDate.Month = RTC_MONTH_SEPTEMBER;
-  	sDate.WeekDay = RTC_WEEKDAY_MONDAY;
-  	sDate.Year = 18;
-  	ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
+//  	ILI9341_Init();//initial driver setup to drive ili9341
+///*Set time*/
+//  	sTime.Hours = 22;
+//  	sTime.Minutes = 28;
+//  	sTime.Seconds = 10;
+////  	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+///*Set date*/
+//  	sDate.Date = 12;
+//  	sDate.Month = RTC_MONTH_SEPTEMBER;
+//  	sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+//  	sDate.Year = 18;
+//  	ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
 //  	ILI9341_Draw_Image((const char*)snow_tiger, SCREEN_HORIZONTAL_1);
 
 //  	HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
@@ -139,7 +137,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  /*Call GSM runone*/
+	  GSM_RunOne();
 	  //----------------------------------------------------------PERFORMANCE TEST
 //	  	  ILI9341_Clear(RED);
 //	  	  HAL_Delay(3000);
@@ -540,55 +539,55 @@ int main(void)
 //
 //
 //	  //----------------------------------------------------------TOUCHSCREEN EXAMPLE
-	  		ILI9341_Fill_Screen(WHITE);
-//	  		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
-	  		ILI9341_Draw_Text("Touchscreen", 10, 10, BLACK, 2, WHITE);
-	  		ILI9341_Draw_Text("Touch to draw", 10, 30, BLACK, 2, WHITE);
-//	  		ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
-
-	  		while(1)
-	  		{
-
-	  			if(TP_Touchpad_Pressed())
-	          {
-
-	  					uint16_t x_pos = 0;
-	  					uint16_t y_pos = 0;
-
-
-	  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_SET);
-
-	  					uint16_t position_array[2];
-
-	  					if(TP_Read_Coordinates(position_array) == TOUCHPAD_DATA_OK)
-	  					{
-	  					x_pos = position_array[0];
-	  					y_pos = position_array[1];
-	  					ILI9341_Draw_Filled_Circle(x_pos, y_pos, 2, BLACK);
+//	  		ILI9341_Fill_Screen(WHITE);
+////	  		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
+//	  		ILI9341_Draw_Text("Touchscreen", 10, 10, BLACK, 2, WHITE);
+//	  		ILI9341_Draw_Text("Touch to draw", 10, 30, BLACK, 2, WHITE);
+////	  		ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
 //
-//	  					ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
-	  					char counter_buff[30];
-	  					sprintf(counter_buff, "POS X: %.3d", x_pos);
-	  					ILI9341_Draw_Text(counter_buff, 10, 80, BLACK, 2, WHITE);
-	  					sprintf(counter_buff, "POS Y: %.3d", y_pos);
-	  					ILI9341_Draw_Text(counter_buff, 10, 120, BLACK, 2, WHITE);
-//	  					ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
-
-	  					}
-	  					else
-	  					{
-	  						ILI9341_Draw_Text("Error", 10, 60, RED, 2, WHITE);
-	  					}
-
-	  					//ILI9341_Draw_Pixel(x_pos, y_pos, BLACK);
-
-	          }
-				else
-				{
-					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
-				}
-
-	  		}
+//	  		while(1)
+//	  		{
+//
+//	  			if(TP_Touchpad_Pressed())
+//	          {
+//
+//	  					uint16_t x_pos = 0;
+//	  					uint16_t y_pos = 0;
+//
+//
+//	  					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_SET);
+//
+//	  					uint16_t position_array[2];
+//
+//	  					if(TP_Read_Coordinates(position_array) == TOUCHPAD_DATA_OK)
+//	  					{
+//	  					x_pos = position_array[0];
+//	  					y_pos = position_array[1];
+//	  					ILI9341_Draw_Filled_Circle(x_pos, y_pos, 2, BLACK);
+////
+////	  					ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
+//	  					char counter_buff[30];
+//	  					sprintf(counter_buff, "POS X: %.3d", x_pos);
+//	  					ILI9341_Draw_Text(counter_buff, 10, 80, BLACK, 2, WHITE);
+//	  					sprintf(counter_buff, "POS Y: %.3d", y_pos);
+//	  					ILI9341_Draw_Text(counter_buff, 10, 120, BLACK, 2, WHITE);
+////	  					ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
+//
+//	  					}
+//	  					else
+//	  					{
+//	  						ILI9341_Draw_Text("Error", 10, 60, RED, 2, WHITE);
+//	  					}
+//
+//	  					//ILI9341_Draw_Pixel(x_pos, y_pos, BLACK);
+//
+//	          }
+//				else
+//				{
+//					HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
+//				}
+//
+//	  		}
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */

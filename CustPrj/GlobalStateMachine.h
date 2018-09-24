@@ -1,7 +1,7 @@
  #ifndef __GLOBAL_STATE_MACHINE_h__
  #define __GLOBAL_STATE_MACHINE_h__
  
- enum {
+typedef enum {
 	 e_GStateInit,
 	 e_GStateSteady,
 	 e_GStateIdle,
