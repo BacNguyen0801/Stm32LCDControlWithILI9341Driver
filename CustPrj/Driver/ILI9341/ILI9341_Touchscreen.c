@@ -92,8 +92,8 @@ uint16_t TP_Read(void)
     {
         value <<= 1;
 
-				HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_SET);
-				HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_RESET);
 			
         if(HAL_GPIO_ReadPin(TP_MISO_PORT, TP_MISO_PIN) != 0)
         {
@@ -136,12 +136,10 @@ void TP_Write(uint8_t value)
 //Read coordinates of touchscreen press. Position[0] = X, Position[1] = Y
 uint8_t TP_Read_Coordinates(uint16_t Coordinates[2])
 {
-		HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_SET);		
-		HAL_GPIO_WritePin(TP_MOSI_PORT, TP_MOSI_PIN, GPIO_PIN_SET);		
-		HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_SET);		
+	HAL_GPIO_WritePin(TP_CLK_PORT, TP_CLK_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(TP_MOSI_PORT, TP_MOSI_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_SET);
 
-	
-	
     uint32_t avg_x, avg_y = 0;		
 		uint16_t rawx, rawy = 0;	
 		uint32_t calculating_x, calculating_y = 0;
@@ -149,9 +147,7 @@ uint8_t TP_Read_Coordinates(uint16_t Coordinates[2])
     uint32_t samples = NO_OF_POSITION_SAMPLES;
     uint32_t counted_samples = 0;
 
-		HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_RESET);
-
-	
+	HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_RESET);
     while((samples > 0)&&(HAL_GPIO_ReadPin(TP_IRQ_PORT, TP_IRQ_PIN) == 0))
     {			
         TP_Write(CMD_RDY);
@@ -168,8 +164,7 @@ uint8_t TP_Read_Coordinates(uint16_t Coordinates[2])
         samples--;
 				counted_samples++;
     };
-		
-		HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(TP_CS_PORT, TP_CS_PIN, GPIO_PIN_SET);
 
 		
 		if((counted_samples == NO_OF_POSITION_SAMPLES)&&(HAL_GPIO_ReadPin(TP_IRQ_PORT, TP_IRQ_PIN) == 0))
@@ -185,9 +180,9 @@ uint8_t TP_Read_Coordinates(uint16_t Coordinates[2])
 		rawy *= -1;
 		
 		//CONVERTING 16bit Value to Screen coordinates
-    // 65535/273 = 240!
+		// 65535/273 = 240!
 		// 65535/204 = 320!
-    Coordinates[0] = ((240 - (rawx/X_TRANSLATION)) - X_OFFSET)*X_MAGNITUDE;
+		Coordinates[0] = ((240 - (rawx/X_TRANSLATION)) - X_OFFSET)*X_MAGNITUDE;
 		Coordinates[1] = ((rawy/Y_TRANSLATION)- Y_OFFSET)*Y_MAGNITUDE;
 		
 		return TOUCHPAD_DATA_OK;			

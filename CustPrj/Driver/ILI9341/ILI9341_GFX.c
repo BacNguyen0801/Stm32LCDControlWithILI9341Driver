@@ -221,7 +221,7 @@ void ILI9341_Draw_Filled_Rectangle_Coord(uint16_t X0, uint16_t Y0, uint16_t X1, 
 
 /*Draws a character (fonts imported from fonts.h) at X,Y location with specified font colour, size and Background colour*/
 /*See fonts.h implementation of font on what is required for changing to a different font when switching fonts libraries*/
-void ILI9341_Draw_Char(char Character, uint8_t X, uint8_t Y, uint16_t Colour, uint16_t Size, uint16_t Background_Colour) 
+void ILI9341_Draw_Char(char Character, uint8_t X, uint8_t Y, uint16_t Colour, uint16_t Size)
 {
 		uint8_t 	function_char;
     uint8_t 	i,j;
@@ -241,7 +241,7 @@ void ILI9341_Draw_Char(char Character, uint8_t X, uint8_t Y, uint16_t Colour, ui
 		}
 		
     // Draw pixels
-		ILI9341_Draw_Rectangle(X, Y, CHAR_WIDTH*Size, CHAR_HEIGHT*Size, Background_Colour);
+//		ILI9341_Draw_Rectangle(X, Y, CHAR_WIDTH*Size, CHAR_HEIGHT*Size, Background_Colour);
     for (j=0; j<CHAR_WIDTH; j++) {
         for (i=0; i<CHAR_HEIGHT; i++) {
             if (temp[j] & (1<<i)) {			
@@ -260,108 +260,27 @@ void ILI9341_Draw_Char(char Character, uint8_t X, uint8_t Y, uint16_t Colour, ui
 
 /*Draws an array of characters (fonts imported from fonts.h) at X,Y location with specified font colour, size and Background colour*/
 /*See fonts.h implementation of font on what is required for changing to a different font when switching fonts libraries*/
-void ILI9341_Draw_Text(const char* Text, uint8_t X, uint8_t Y, uint16_t Colour, uint16_t Size, uint16_t Background_Colour)
+void ILI9341_Draw_Text(const char* Text, uint8_t X, uint8_t Y, uint16_t Colour, uint16_t Size)
 {
     while (*Text) {
-        ILI9341_Draw_Char(*Text++, X, Y, Colour, Size, Background_Colour);
+        ILI9341_Draw_Char(*Text++, X, Y, Colour, Size);
         X += CHAR_WIDTH*Size;
     }
+}
+
+void ILI9341_Draw_Button(const char* Text, uint8_t X, uint8_t Y,uint16_t Colour, uint16_t Size)
+{
+//	ILI9341_Draw_Rectangle(X, Y, , M_HIEGHT_ClockSetting, RED);
+//	ILI9341_Draw_Text()
 }
 
 /*Draws a full screen picture from flash. Image converted from RGB .jpeg/other to C array using online converter*/
 //USING CONVERTER: http://www.digole.com/tools/PicturetoC_Hex_converter.php
 //65K colour (2Bytes / Pixel)
-void ILI9341_Draw_Image(const char* Image_Array, uint8_t Orientation)
+void ILI9341_Draw_Image(uint16_t* Image_Array, uint8_t Orientation)
 {
-	if(Orientation == SCREEN_HORIZONTAL_1)
-	{
-		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
-		ILI9341_Set_Address(0,0,ILI9341_SCREEN_WIDTH,ILI9341_SCREEN_HEIGHT);
-//		ILI9341_Draw_Rectangle(100, 100,100,100, GREEN);
-		ILI9341_Write_Data_Block2((uint16_t*)Image_Array, ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT);
-	}
+	ILI9341_Set_Address(0,0,ILI9341_SCREEN_WIDTH,ILI9341_SCREEN_HEIGHT);
+	ILI9341_Write_Data_Block_With_ArrayRBG(Image_Array, ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT);
 }
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_RESET);
-//
-//		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
-//		uint32_t counter = 0;
-//		for(uint32_t i = 0; i < ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT*2/BURST_MAX_SIZE; i++)
-//		{
-//				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
-//				{
-//					Temp_small_buffer[k]	= Image_Array[counter+k];
-//					ILI9341_Write_Data(Image_Array[counter+k]);
-//				}
-////				HAL_SPI_Transmit(&hspi3, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);
-//
-//				counter += BURST_MAX_SIZE;
-//		}
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_SET);
-//	}
-//	else if(Orientation == SCREEN_HORIZONTAL_2)
-//	{
-//		ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
-//		ILI9341_Set_Address(0,0,ILI9341_SCREEN_WIDTH,ILI9341_SCREEN_HEIGHT);
-//
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_RESET);
-//
-//		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
-//		uint32_t counter = 0;
-//		for(uint32_t i = 0; i < ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT*2/BURST_MAX_SIZE; i++)
-//		{
-//				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
-//				{
-//					Temp_small_buffer[k]	= Image_Array[counter+k];
-//				}
-////				HAL_SPI_Transmit(&hspi3, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);
-//				counter += BURST_MAX_SIZE;
-//		}
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_SET);
-//	}
-//	else if(Orientation == SCREEN_VERTICAL_2)
-//	{
-//		ILI9341_Set_Rotation(SCREEN_VERTICAL_2);
-//		ILI9341_Set_Address(0,0,ILI9341_SCREEN_HEIGHT,ILI9341_SCREEN_WIDTH);
-//
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_RESET);
-//
-//		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
-//		uint32_t counter = 0;
-//		for(uint32_t i = 0; i < ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT*2/BURST_MAX_SIZE; i++)
-//		{
-//				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
-//				{
-//					Temp_small_buffer[k]	= Image_Array[counter+k];
-//				}
-//				HAL_SPI_Transmit(&hspi3, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);
-//				counter += BURST_MAX_SIZE;
-//		}
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_SET);
-//	}
-//	else if(Orientation == SCREEN_VERTICAL_1)
-//	{
-//		ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
-//		ILI9341_Set_Address(0,0,ILI9341_SCREEN_HEIGHT,ILI9341_SCREEN_WIDTH);
-//
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_RESET);
-//
-//		unsigned char Temp_small_buffer[BURST_MAX_SIZE];
-//		uint32_t counter = 0;
-//		for(uint32_t i = 0; i < ILI9341_SCREEN_WIDTH*ILI9341_SCREEN_HEIGHT*2/BURST_MAX_SIZE; i++)
-//		{
-//				for(uint32_t k = 0; k< BURST_MAX_SIZE; k++)
-//				{
-//					Temp_small_buffer[k]	= Image_Array[counter+k];
-//				}
-//				HAL_SPI_Transmit(&hspi3, (unsigned char*)Temp_small_buffer, BURST_MAX_SIZE, 10);
-//				counter += BURST_MAX_SIZE;
-//		}
-//		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_SET);
-//	}
-//}
 
 

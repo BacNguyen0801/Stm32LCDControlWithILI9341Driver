@@ -86,7 +86,7 @@
 
 #include "stm32f1xx_hal.h"
 
-#define ILI9341_SCREEN_HEIGHT 240 
+#define ILI9341_SCREEN_HEIGHT 240
 #define ILI9341_SCREEN_WIDTH 	320
 
 //SPI INSTANCE
@@ -159,7 +159,7 @@ void ILI9341_Draw_Colour(uint16_t Colour);
 void ILI9341_Draw_Pixel(uint16_t X,uint16_t Y,uint16_t Colour);
 void ILI9341_Draw_Colour_Burst(uint16_t Colour, uint32_t Size);
 void ILI9341_Clear(uint16_t Colour);
-void ILI9341_Write_Data_Block2(uint16_t* Data, uint32_t size);
+void ILI9341_Write_Data_Block_With_ArrayRBG(uint16_t* Data, uint32_t size);
 
 void ILI9341_Draw_Rectangle(uint16_t X, uint16_t Y, uint16_t Width, uint16_t Height, uint16_t Colour);
 void ILI9341_Draw_Horizontal_Line(uint16_t X, uint16_t Y, uint16_t Width, uint16_t Colour);

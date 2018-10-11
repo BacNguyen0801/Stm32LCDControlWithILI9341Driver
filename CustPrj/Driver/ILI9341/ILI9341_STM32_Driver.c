@@ -103,6 +103,7 @@ void ILI9341_Port_Send(uint16_t SPI_Data)
 {
 	HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, GPIO_PIN_RESET);
 	LCD_DATA_PORT->ODR = SPI_Data;
+	HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, GPIO_PIN_SET);
 }
 
@@ -134,11 +135,12 @@ void ILI9341_Write_Data_Block(uint16_t Data, uint32_t size)
 		ILI9341_Write_Data(Data);
 	}
 }
-void ILI9341_Write_Data_Block2(uint16_t* Data, uint32_t size)
+void ILI9341_Write_Data_Block_With_ArrayRBG(uint16_t* Data, uint32_t size)
 {
 	for(uint32_t i = 0; i < size; ++i)
 	{
-		ILI9341_Write_Data(Data[i]);
+		volatile uint16_t color = 0xFF00;//Data[i];
+		ILI9341_Write_Data(color);
 	}
 }
 
@@ -146,6 +148,7 @@ void ILI9341_Clear(uint16_t Color)
 {
 	ILI9341_Set_Address(0,0,LCD_WIDTH,LCD_HEIGHT);
 	ILI9341_Write_Data_Block(Color, LCD_WIDTH*LCD_HEIGHT);
+	HAL_Delay(1000);
 }
 
 /* Set Address - Location block - to draw into */
@@ -184,23 +187,23 @@ switch(screen_rotation)
 	{
 		case SCREEN_VERTICAL_1:
 			ILI9341_Write_Data(0x40|0x08);
-			LCD_WIDTH = 240;
-			LCD_HEIGHT = 320;
+			LCD_WIDTH = ILI9341_SCREEN_HEIGHT;
+			LCD_HEIGHT = ILI9341_SCREEN_WIDTH;
 			break;
 		case SCREEN_HORIZONTAL_1:
 			ILI9341_Write_Data(0x20|0x08);
-			LCD_WIDTH  = 320;
-			LCD_HEIGHT = 240;
+			LCD_WIDTH  = ILI9341_SCREEN_WIDTH;
+			LCD_HEIGHT = ILI9341_SCREEN_HEIGHT;
 			break;
 		case SCREEN_VERTICAL_2:
 			ILI9341_Write_Data(0x80|0x08);
-			LCD_WIDTH  = 240;
-			LCD_HEIGHT = 320;
+			LCD_WIDTH  = ILI9341_SCREEN_HEIGHT;
+			LCD_HEIGHT = ILI9341_SCREEN_WIDTH;
 			break;
 		case SCREEN_HORIZONTAL_2:
 			ILI9341_Write_Data(0x40|0x80|0x20|0x08);
-			LCD_WIDTH  = 320;
-			LCD_HEIGHT = 240;
+			LCD_WIDTH  = ILI9341_SCREEN_WIDTH;
+			LCD_HEIGHT = ILI9341_SCREEN_HEIGHT;
 			break;
 		default:
 			//EXIT IF SCREEN ROTATION NOT VALID!
@@ -212,7 +215,8 @@ switch(screen_rotation)
 void ILI9341_Enable(void)
 {
 HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);
-HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET);
+HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET); /*Turn on light*/
+HAL_Delay(10);
 }
 
 /*Initialize LCD display*/
@@ -345,13 +349,12 @@ void ILI9341_Init(void)
 
 	//EXIT SLEEP
 	ILI9341_Write_Command(0x11);
-	HAL_Delay(80);
+	HAL_Delay(100);
 
 	//TURN ON DISPLAY
 	ILI9341_Write_Command(0x29);
 
-	//STARTING ROTATION
-	ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
+	ILI9341_Set_Rotation(SCREEN_HORIZONTAL_1);/*Set default*/
 }
 
 //INTERNAL FUNCTION OF LIBRARY, USAGE NOT RECOMENDED, USE Draw_Pixel INSTEAD

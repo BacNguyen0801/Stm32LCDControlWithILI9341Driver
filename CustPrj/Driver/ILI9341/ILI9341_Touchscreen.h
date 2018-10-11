@@ -128,7 +128,7 @@ if(TP_Touchpad_Pressed())
 //If library runs too slow decrease NO_OF_POSITION_SAMPLES, but
 //expect inreasingly noisy or incorrect locations returned
 
-#define NO_OF_POSITION_SAMPLES	 	1000
+#define NO_OF_POSITION_SAMPLES	 	100
 
 //Internal Touchpad command, do not call directly
 uint16_t TP_Read(void);

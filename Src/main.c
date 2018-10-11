@@ -116,21 +116,6 @@ int main(void)
   MX_TIM1_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-//  	ILI9341_Init();//initial driver setup to drive ili9341
-///*Set time*/
-//  	sTime.Hours = 22;
-//  	sTime.Minutes = 28;
-//  	sTime.Seconds = 10;
-////  	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-///*Set date*/
-//  	sDate.Date = 12;
-//  	sDate.Month = RTC_MONTH_SEPTEMBER;
-//  	sDate.WeekDay = RTC_WEEKDAY_MONDAY;
-//  	sDate.Year = 18;
-//  	ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
-//  	ILI9341_Draw_Image((const char*)snow_tiger, SCREEN_HORIZONTAL_1);
-
-//  	HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -687,17 +672,10 @@ static void MX_RTC_Init(void)
   flag = rtc_read_backup_reg(1);
   if(flag == 0x32F2)
   {
-	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
+//	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
 	  return;
   }
   rtc_write_backup_reg(1, 0x32F2);
-
-  flag = rtc_read_backup_reg(1);
-  if(flag == 0x32F2)
-  {
-	  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
-	  return;
-  }
   /* USER CODE END RTC_Init 2 */
 
     /**Initialize RTC and set the Time and Date 
